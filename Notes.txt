@@ -1,0 +1,243 @@
+Extensions: 
+1. Prettier -> File, Preferences, Settings, Default Formatter - Choose Prettier
+2. Material Icon
+
+JS Array Functions:
+1. map
+2. filter
+3. reduce
+4. concat
+5. find
+6. findIndex
+7. splice
+8. slice
+
+OPTIMIZATION  [2 terms:(re-evaluation and re-creation)]
+Component Updates:
+1. only props, state or context changes, react components/functions re-evaluates and 
+not re-rendered. [[[re-evaluating component !== re-rendering DOM]]] - VIRTUAL rendering
+It will affect only the changes and not the entire dom
+
+2. CHILD COMPONENT RE_EVALUATION:
+Whenever the parent component executed, the child component will also execute. It doesn't
+necessarily require to change the state.(But will not re-render)
+
+PREVENTING UNNECESSARY CHILD COMPONENT RE-EVALUATION USING REACT.MEMO and USECALLBACK
+parent.props.primitive === parent.previousprops.primitive (it will check and the same)
+
+parent.props.function/array/object(refrence) !== parent.previousprops.reference
+
+(react.memo will work only for primitive props)
+
+3. PREVENTING FUNCTION RE-CREATION USING USECALLBACK (using dependencies)
+
+4. SCHEDULING STATE changes
+all the state changes will happen at the same time. So, it is advisable that
+if we want the state changes from previous state then use:
+setSomeState((prevState) => !prevState)
+if some state changes depends on other state then, use that state in useEffect
+dependencies
+
+5. In some cases, whie using React.memo(Component) and useCallback to the functions,
+there is a chance in the child component, it needs to re-run because some props other
+may change. In that case, we should use useMemo instead of React.memo
+When to use: Performance intensive tool/calculation, Eg: sorting
+
+swapi.dev, firebase.google.com -> dummy data provider
+
+CUSTOM HOOKS
+WHY?
+1. In code duplication, we may need re-usable components with react hooks and side 
+effects, at that time, we cannot be able to create reusable functions or components.
+we need custom hooks.(with react hooks and side effects)
+
+FORMS AND USER_INPUT
+1. using state
+2. using ref
+When to use these two?
+1. If u need the input values for every key stroke(every changes) then use state
+2. If u need input values during submission(once in a while), at that time ref will 
+be better. (In this case, state will cause unnecessary re-evaluation)
+
+                                        3 types
+    1. During submitting          2. Input losing focus         3. On every keyStroke            
+
+To check for the empty values 
+-------------------------------
+1. use trim() Eg: userNameInput.trim() === ''
+Two states for verifying invalid inputs
+-------------------------------------------
+2. Be very careful while setting invalid state to input fields
+Eg: const [nameIsValid, setNameIsValid] = useState(false);
+// initially this should set to false and not to true.
+so, use one more state for verifying this.Refer Forms_and_userInput SimpleInput file.
+
+CUSTOM HOOKS FOR FORMS:
+https://academind.com/tutorials/reactjs-a-custom-useform-hook/
+
+STATE:
+
+1. Local state - state belongs to single component
+useState/useReducer
+2. Cross-Component state - state affecting multiple components
+Eg: Modal component which is used in many components
+useState/useReducer with prop chains/prop drilling
+3. app wide state - state affecting most/all components
+Eg: authentication
+useState/useReducer with prop chains/prop drilling
+
+For cross-component/ app-wide state: context api/ redux
+
+Diff context api and redux:
+CONTEXT API DISADVANTAGES:
+1. If we have mulitple contexts, then project structure would be messy.
+<AuthContext>
+    <ThemeContext>
+        <UserContext>
+            <TaskContext>
+            </TaskContext>
+        </UserContext>
+    </ThemeContext>
+</AuthContext>
+2. Not suitable for more frequent changes/Performance
+
+Side effects:
+1. fetching end points
+2. localStorage
+
+CORE REDUX CONCEPTS
+--------------------
+       ----------------->  Reducer
+       |                     |
+       |                     |  changes store data
+       |                     |
+       |           CENTRAL DATA STATE (Store)
+       |                     |
+       |                     |  Subscription
+       |                     |
+    actions <----------- Components
+              dispatch
+
+useReducer -> const [state, dispatch] = useReducer(initialState, reducer(initialState, action));
+
+Reducer: pure function (no side effects)
+
+Challenges in reducers:
+1. Even if one state changes, all the other states should need older state
+Eg: if the initial state is {counter:0,showCounter:false}
+In reducers for each actions, we need to return both of these states. 
+It will increase the code
+
+2. It will also increase complexity while writing code as in context
+
+export default const store = createStore(reducer);
+// if combine reducers then configureStore and combineReducers
+<Provider store={store}><App/></Provider>
+
+useSelector(state=>state.counter)
+useDispatch()
+
+SOLUTION is
+-----------
+Redux toolkit:
+
+const store = configureStore({ reducer: counterSlice.reducer });
+
+//All the reducers in counterSlice
+const counterSlice = createSlice({
+    name,
+    initialState,
+    reducers
+})
+
+ACTION CREATOR:
+THUNK:
+ ---> A function that delays an action until later
+ ---> An action creator function that doesn't return action itself, but a function
+ that returns actions
+
+ Router
+ -------
+ 1. Route, BrowserRouter, Switch, exact, Link, NavLink, useHistory, useParams,
+ useLocation, URLSearchParams, Prompt, useRouteMatch
+
+
+DEPLOYMENT STEPS
+-----------------
+1. Test
+2. Optimize
+3. Build
+4. Upload production code to server
+5. Configure Server
+
+Lazy Loading  -> it will make initial loading of the app faster(LOADS WHEN NEEDED)
+-------------
+Especially useful for app with many components and much business logic
+
+1. Split the code into several chunks, the chunks will not load very immediately, 
+but when the user wants to route/see the code only then React loads the code.
+
+2. As it is lazy, it will take some time to load(fallback), we should add fallback 
+via Suspense.
+
+INTO Server
+-----------
+1. React SPA - client side - static 
+static website hosting provider
+
+Authentication
+--------------
+authentication tokens - jwt - these "tokens" are just really long strings which are
+constructured by an algorithm that encodes data into a string (with the help of 
+private key only known to the server)
+
+Next.JS
+--------
+--> React Framework for Production (full stack framework for production)
+
+Key features and benefits - SEO (Search Engine Optimization)
+--------------------------
+
+1. Built-in Server side rendering - it will show pre-render react pages into the 
+server (initial load experience)
+2. File-based routing - define pages and routes with files and folders instead of 
+code - less code, less work, highly understandable
+3. Full-stack capabilities - easily add backend(server-side code) to Next/react apps
+storing, getting and authenticating data etc.
+
+Routing - using file name and folders
+Dynamic routing -> [].js (file name) -> 
+to get that value useRouter() hook
+1. router.query
+2. router.push()  alternate to history.push
+Nested routing -> folder/folder/file name
+
+FETCHES DATA FOR PRE-RENDERING
+---------------------------------
+
+getStaticProps() revalidate: 1(sec) [revalidate after regular update during deployment]
+      |
+  get static data in the server side, that the page might wait for
+
+getServerSideProps(context)  {
+    const req = context.req;
+    const res = context.res;
+    // if context obj is needed, then go for getServerSideProps else getStaticProps
+}
+
+getStaticPaths(in the same file of the corresponding path), fallback 
+
+API Routing
+-------------
+api folder -> accept and return data in json format
+
+DEPLOYING NEXT.JS apps
+-----------------------
+Vercel
+
+
+
+
+
+
+
