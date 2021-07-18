@@ -13,5 +13,6 @@ An awesome course with the React core concepts such as
 - Next.js, 
 - testing, 
 - summary, 
-- deployment and much more. 
+- deployment and much more.   
+                                                                                                                                              
 There is a separate projects for all the react concepts which are the good work arounds and practice.
