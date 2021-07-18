@@ -1,6 +1,6 @@
 # REACT APPLICATIONS
 
-This repository is the dedicated Udemy **React Course** `(48 hrs course)` - "Dive in and learn React.js from scratch! Learn Reactjs, Hooks, Redux, React Routing, Animations, Next.js and way more!" by the instructor "Maximilian Schwarzmuller". All the projects were developed as per the instructons in this course. 
+This repository is the dedicated Udemy **React Course** `(48 hrs course) and 25 applications` - "Dive in and learn React.js from scratch! Learn Reactjs, Hooks, Redux, React Routing, Animations, Next.js and way more!" by the instructor "Maximilian Schwarzmuller". All the projects were developed as per the instructons in this course. 
 An awesome course with the React core concepts such as 
 - React hooks, 
 - Context API, 
