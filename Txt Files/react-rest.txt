@@ -1,0 +1,65 @@
+Validation of Forms: 
+
+validateProductForm(values){
+    let errors={}
+    if(!values.productId)
+    {
+        errors.productId='Enter productId'
+    }
+    else if(!values.productName){
+        errors.productName='Enter product Name'
+    }
+    else if(values.productName.length<3){
+        errors.productName='Length of productName should be greater than 3'
+    }
+    else if(!isNaN(values.productName)){
+        errors.productName='ProductName should not be integer'
+    }
+    else if(!values.quantityOnHand){
+        errors.quantityOnHand='Enter quantity on Hand'
+    }
+    else if(!values.price){
+        errors.price='Enter price'
+    }
+    else if(values.price<0){
+        errors.price='Price should not be negative'
+    }
+    return errors
+    }
+==================================================================================
+Using Formik :
+
+<div className="container">
+        <Formik initialValues={{productId,productName,quantityOnHand,price}}
+         enableReinitialize={true} onSubmit={this.onSubmit} validateOnChange={false}
+         validateOnBlur={false} validate={this.validateProductForm}>
+            <Form>
+                <ErrorMessage name="productId" component="div" className="alert alert-warning"></ErrorMessage>
+                <fieldset className="form-group">
+                    <label>Product Id</label>
+                    <Field className="form-control"
+                    type="text" name="productId" ></Field>
+                </fieldset>
+
+                <ErrorMessage name="productName" component="div" className="alert alert-warning"></ErrorMessage>
+                <fieldset className="form-group">
+                    <label>Product Name</label>
+                    <Field className="form-control"
+                    type="text" name="productName"></Field>
+                </fieldset>
+                <ErrorMessage name="quantityOnHand" component="div" className="alert alert-warning"></ErrorMessage>
+                <fieldset className="form-group">
+                    <label>Quantity On Hand</label>
+                    <Field className="form-control"
+                    type="text" name="quantityOnHand"></Field>
+                </fieldset>
+                <ErrorMessage name="price" component="div" className="alert alert-warning"></ErrorMessage>
+                <fieldset className="form-group">
+                    <label>Price</label>
+                    <Field className="form-control"
+                    type="text" name="price"></Field>
+                </fieldset>
+                <button className="btn btn-success" type="submit">Update/Add</button>
+            </Form>
+        </Formik>
+        </div>

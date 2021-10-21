@@ -1,0 +1,194 @@
+
+db.cust.insert(
+{
+"_id" : 1020,
+        "customerName" : "Mohit",
+        "customerId" : 3400,
+        "emailId" : "mohit@gmail.com",
+        "gender" : "male",
+        "age" : 45
+})
+
+db.Customer.insert({"name":"Punnet","address":"Samarnath Nagar","cityId":db.CityMaster.find()[0].id});
+
+======================================================================================================
+
+
+db.customersData.insert([
+    {
+  "_id": ObjectId("49b83bda421238c76f5c1234"),
+  "name": "Raj",
+  "mobileNumber":9876543216,
+  "email": "raj@gmail.com",
+  "country": "INDIA"
+  }
+])
+
+db.customersorders.insert([
+{
+  "user_id": ObjectId("49b83bda421238c76f5c1234"),
+  "orderdate": ISODate("2002-09-05T03:05:00.123Z"),
+  "ordertype": "Express",
+  "text": "Cool Pic",
+  "rating" : "important"
+}
+])
+
+db.customersorders.aggregate([
+  { "$match": { "ordertype": "Fast" } },
+  { "$limit": 5 },
+  { "$lookup": {
+    "localField": "user_id",
+    "from": "customersData",
+    "foreignField": "_id",
+    "as": "OrderBy"
+  } },
+  { "$unwind": "$OrderBy" },
+  { "$project": {
+    "ordertype": 1,
+    "orderdate": 1,
+    "OrderBy.name": 1,
+    "OrderBy.mobileNumber": 1,
+    "OrderBy.email": 1
+  } }
+]).pretty();
+
+db.banklist.aggregate([
+{$group:{_id:{CERT:"$CERT"}}}
+]);
+
+=================================================================================
+db.mybulkData10.insert([
+{
+    "name": "Hammad",
+    "salary": "78000",
+    "dob": "2013-11-16"
+},
+{
+    "name": "Arhaan",
+    "salary": "98000",
+    "dob": "2017-08-05"
+}
+]
+)
+Solution:
+var bulk = db.mybulkData10.initializeUnorderedBulkOp(),
+    counter = 0; // counter to keep track of the batch update size
+ 
+db.mybulkData10.find({
+    "salary": { "$exists": true, "$type": 2 },
+    "dob": { "$exists": true, "$type": 2 }
+}).forEach(function(doc){
+    var newSalary = parseInt(doc.salary),
+        newDob = new ISODate(doc.dob);
+    bulk.find({ "_id": doc._id }).updateOne({
+        "$set": { "salary": newSalary, "dob": newDob }
+    });
+ 
+    counter++; // increment counter
+    if (counter % 2 == 0) {
+        bulk.execute(); // Execute per 1000 operations and re-initialize every 1000 update statements
+        bulk = db.mybulkData10.initializeUnorderedBulkOp();
+    }
+});
+=========================================================================
+
+var bulk = db.banklist.initializeUnorderedBulkOp(),
+    counter = 0;
+db.banklist.find({
+    "ClosingDate": { "$exists": true, "$type": 2 },
+    "UpdatedDate": { "$exists": true, "$type": 2 }
+}).forEach(function(doc){
+     newClosingDate = new ISODate(doc.ClosingDate),
+    newUpdatedDate = new ISODate(doc.UpdatedDate);
+    bulk.find({ "CERT": doc.CERT }).updateOne({
+        "$set": { "ClosingDate": newClosingDate, "UpdatedDate":newUpdatedDate }
+    });
+ 
+    counter++;
+    if (counter % 559 == 0) {
+        bulk.execute(); 
+        bulk = db.banklist.initializeUnorderedBulkOp();
+    }
+});
+====================================================================================================
+Authentication in mongo:
+db.custDetails.insert([{"id":211,"customerName":"Ranjitha","billAmt":5600}]);
+mongod --auth --port 1233 --dbpath="C:\Users\psabapathi\Documents\MongoDB\mydata1"
+mongo --port 1233
+show users
+close both
+use admin
+create collections and insert fields
+db.createUser({user:"poovizhi",pwd:"sabapathi",roles:[{role:"userAdminAnyDatabase",db:"admin"}]});
+db.createUser({user:"poovisha",pwd:"sabapathi",roles:[{role:"readWrite",db:"admin"}]});
+close both
+--auth
+mongo --port 1234 -u "poovizhi" -p "sabapathi"
+=============================================
+C:\Users\Tufail>mongod --port 9876 --dbpath="F:\myData"
+ 
+C:\Users\Tufail>mongo --port 9876
+ 
+use admin
+ 
+db.custDetails2.insert({_id:1,name :"Arushi Mishra",emailID:"arushi395@gmail.com",mobileNumber:8176976902})
+ 
+ 
+db.custDetails.find();
+ 
+mongod --auth --port 12345 --dbpath="I:\NewTrainingMaterial\mongodb\Demos\Adv\data\db“
+ 
+ 
+mongo --port 7543 -u "tufail" -p "ahmed"
+=============================================================================================================
+Sharding in Mongo:
+Sharding Server
+create a folder shardingdemo
+
+md /data
+	/shard0/rs0 
+	/shard0/rs1 
+	/shard0/rs2
+	
+cd shardingdemo
+
+
+mongod --replSet s2 --logpath "s2-r0.log" --dbpath data\shard2\rs0 --port 57017  --shardsvr
+
+mongod --replSet s2 --logpath "s2-r1.log" --dbpath data\shard2\rs1 --port 57018  --shardsvr
+
+mongod --replSet s2 --logpath "s2-r2.log" --dbpath data\shard2\rs2 --port 57019  --shardsvr
+
+===========================
+1) mongo --port 57017
+
+2) config = { _id: "s2", members:[
+          { _id : 0, host : "localhost:57017" },
+          { _id : 1, host : "localhost:57018" },
+          { _id : 2, host : "localhost:57019" }]};
+3) rs.initiate(config)
+
+===================================================
+Config Server:
+mongod –replSet cs –logpath "cfg-a.log" –dbpath data\config\config-a –port 57040 –configsvr
+mongod –replSet cs –logpath "cfg-b.log" –dbpath data\config\config-b –port 57041 –configsvr
+mongod –replSet cs –logpath "cfg-c.log" –dbpath data\config\config-c –port 57042 –configsvr
+ 
+And add thereafter these lines:
+ 
+ 
+mongo –port 57040
+config = { _id: "cs", members:[
+{ _id : 0, host : "localhost:57040" },
+{ _id : 1, host : "localhost:57041" },
+{ _id : 2, host : "localhost:57042" }]};
+ 
+rs.initiate(config)
+=======================================================
+db.restaurants.find({$and:[{$and:[{"grades.score":{$gt:70}},{"address.coord:{$lt:-65.7654}}]},{{"cuisine":"American"}}]});
+db.restaurants.find( {"cuisine" : {$ne : "American "},"grades.grade" :"A","borough": {$ne : "Brooklyn"}}).sort({"cuisine":-1});
+db.restaurants.find({"borough":"Bronx",{$or:[{"cuisine":"American"},{"cuisine":"Chinese"}]}).pretty()
+db.restaurants.find({"score":{$lt:10}},{"restaurant_id":1,"name":1,"borough":1,"cuisine":1}).pretty()
+
+db.restaurants.find({borough:"Bronx",$or:[{"cuisine":"American "},{"cuisine":"Chinese"}]}).pretty()

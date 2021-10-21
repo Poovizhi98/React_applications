@@ -1,0 +1,158 @@
+Javascript--->functionalities
+----------------------------------
+document.getElementById("demo").innerHTML=
+document.getElementById("myImage").src='.gif'
+document.getElementById("a").style.display=
+External js
+------------
+<script src="a.js"></script>
+Display possibilities
+------------------------
+1.innerHTML
+2.document.write()-->If you try with onClick() func,all other existing html content will get deleted
+3.window.alert()
+4.console()
+If you want to write strings+expression or strings+html tags should be in quotes Eg: 
+      -------
+document.getElementById("demo").innerHTML=pi+"<br>"+person+"<br>"+answer;
+------------------
+EVENT LOOP IN Js  |
+------------------
+Data types
+------------
+Primitive data types
+-------------------------
+string,number,boolean,undefined
+Accessing Object Properties
+-----------------------------
+obj={property:property value}
+1.objectName.propertyName
+2.objectName["propertyName"]
+==============================================
+1.name=person.fullName()
+2.fullName:function(){
+    return this.firstName+" "+this.lastName;}
+};
+----------------------------------------------
+var a= new Animal();//New creates a new object for a variable
+===================================================================
+Escape characters in string
+"we are the so-called \"Vikings\" from the north"
+"the character \\ is called blackslash"
+We can't able to compare js objects
+--------------------------------------
+Eg:
+------
+var x=new String("A");
+var y=new String("A");
+//(x==y) and (x===y) is false because x and y are different objects
+String properties
+-------------------
+str.indexOf('a',5)//return first occurence str.lastindexOf('a')
+str.slice(1,4)//Takes first and before last
+str.substring(1,4)//Similar to slice but will not accept -ve indexes
+str.substr(1,4)//Similar to slice but 2nd parameter specifies length
+str.replace("a","b");str.replace(/Microsoft/g,"a")
+txt.toUpperCase(),txt.toLowerCase(),text1.concat(" ",text2)
+str.trim()//Removes white spaces
+Extracting String Characters
+--------------------------------
+charAt(pos),charCodeAt(pos)//returns ASCII character for that parti.index
+If you want to convert obj to arr,use
+------------------------------------------
+1.str.split("")
+2.str.split(,)
+3.str.split(|)
+Js Numbers
+-------------
+number.toString(10)//base 10(decimal)  base 16(hexadecimal) 2(Binary)
+Js Number Methods
+--------------------
+1.Number()     2.parseInt()       3.parseFloat()
+Number.MAX_VALUE(),MIN_VALUE(),INFINITY()
+Arrays
+--------
+var a=new Array("A","B","C")
+Array Methods
+----------------
+arrayName.toString();--->returns array as a comma separated string
+arrayName.join("");--->joins all strings in array
+arrayName.shift();--->removes first element from the array
+slice
+Array sort
+-------------
+arrayName.sort(),reverse()
+Block Scope
+-------------
+1-----var declaration of a variable can't have a block scope
+2-----But let declaration of a variable can have a block scope(doesnot have value outside the block)
+var CarName;(WE can use)  let carName(we can't use)
+const is having the similar functionalities as let but we can't able to redeclare the variables again in const
+------------------------------------------------------------------------
+Closures
+----------
+self-invoking function
+parental scope
+Eg:
+----
+var add=(function(){
+ var counter=0;
+ return function(){counter+=1;
+                   return counter;})();
+------------------------------------------------------------------------
+Js Engine:
+-------------
+The callback function is put on a sort of queue called the "event loop" until it will be executed with a result from the request.
+Asynchrornous Javascript
+----------------------------
+Ajax(Asynchornous js and xml)
+setTimeOut and setInterval(Browser API)
+1.Execution Stack
+2.BrowserAPI
+3.function Queue
+4.Event loop
+Callbacks
+-----------
+1.To controls the call with asynchronous js
+=================
+OBJECT LITERALS  |
+=================
+
+Promises/Callbacks/  Async/Await
+
+Spread operator and rest operator
+----------------------------------
+//add the elements of an existing array into a new array
+var certsToAdd=['Algorithms and Data Structures','Front End Libraries'];
+var certifications=['Responsive Web Design',...certsToAdd,'Data Visualization','APIs and MicroServices']
+console.log(certifications)
+//pass elements of an array as arguments to a function
+function addThreeNumbers(x,y,z){
+console.log(x+y+z)
+}
+var args=[0,1,2,3]
+addThreeNumbers(...args)
+//copy arrays
+var arr=[1,2,3]
+var arr2=[...arr]
+arr2.push(4)
+console.log(arr)
+console.log(arr2)
+//concatenate arrays
+var arr1=[0,1,2]
+var arr2=[3,4,5]
+arr1.concat(arr2)
+arr1=[...arr1,...arr2]
+console.log(arr1)
+Opposite to spread is rest operator
+-------------------------------------
+//REST:Condense multiple elements into an array
+function multiply(multiplier,...theArgs){
+  return theArgs.map(function(element){
+     return multiplier*element;
+});
+}
+var arr=multiply(2,1,2,3)
+console.log(arr)
+
+

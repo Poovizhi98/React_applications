@@ -1,0 +1,11 @@
+1.pre-loaded
+2.after added that option should be deleted in the select list
+3.No hardcoded
+4.option for checkbox to be displayed or not
+5.css -> use sass easily changable
+
+
+
+1.should not have any worry abt data --> including option for checkbox
+2.preloaded state
+3.once selected delete that option

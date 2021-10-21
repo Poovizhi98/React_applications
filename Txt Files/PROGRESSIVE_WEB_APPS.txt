@@ -1,0 +1,23 @@
+PROGRESSIVE WEB APPS
+======================
+1.offline
+2.Needs to be work in https
+3.manifest so we can add to home screen like real web apps
+4.service workers and caching
+5.smooth transitions and interactions like mobile apps
+6.responsive
+7.Fast and reliable
+
+SERVICE WORKERS AND CACHING
+==============================
+1.api calls it will store with the help of caching. so even work in offline
+2.Caching assets
+3.push notifications
+4.used in progressive web apps
+5.background sync api
+
+LIFE CYCLE OF SERVICE WORKERS
+================================
+1.REGISTER
+2.INSTALL
+3.ACTIVATE

@@ -1,0 +1,29 @@
+1)Find all the customers whose balance is > 5000
+db.newcustomers.find({"balance":{'$gt':5000}}).pretty();
+
+2)Update all the customers balance to 5001 who are from city : Mumbai
+db.newcustomers.update({"address.city":"Mumbai"},{$set:{"balance":5001}},false,true).pretty();
+
+3) Find city wise sum :
+ 
+For example :
+    Agra : 98000
+    Mumbai : 88181
+    Chennai : 88000
+    ...
+    ..
+
+db.newcustomers.aggregate([{$group:{_id:'$address.city',ourCustomResult:{$sum:'$balance'}}}]);
+
+4) Find all the customers who are senior citizen 
+
+db.newcustomers.find({'age':{'$gte':58}}).pretty();
+
+db.newcustomers.update({"customerName":"Mohan"},{$set:{"dob":ISODate("1998-05-06T06:01:17.171Z")}});
+
+db.newcustomers.aggregate(
+        {$sort : {dob : -1}}
+        ).forEach((data) => {
+                print('\nCustomer Name : '+ data.customerName + '\nD.O.B : ' + data.dob)
+                }
+        )

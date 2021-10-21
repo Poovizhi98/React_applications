@@ -1,0 +1,38 @@
+Day 1:HTML Basics
+Topics covered:
+1.Interpage
+2.Intrapage
+3.putting Line
+4.usemap
+5.lists-ordered & unordered
+6.Table-using th,tr,td,someattributes like cellspacing
+7.Login-input text=button,checkbox,select(option value),value,id
+8.Registration-gender(same should be given to value,id,name),upload photo-input type=file
+for read only-input type=image src...
+
+
+
+Day 2:Javascript basics
+Topics covered:
+<script type="text/javascript"> concatenation and intendation are very important
+1.calling function inside another function
+2.scope of the variables(if using var scope changes)
+3.using ` and $ symbol, how to read system date-new Date(),onclick
+4.getting random number using Math.random()
+5.using prompt,a.charAt(), using string methods
+6.using div and span(div-block tag,span-inline tag)
+To use this,var div1=document.getElementId("div1")\ndiv1.innerHTML=<"font color=red></font>
+7.using these properties,making login page
+
+
+https://pastebin.com/J0VyQ8w2-method1
+https://pastebin.com/7KP87PD3
+
+developer.mozila/org
+
+https://pastebin.com/qm8qi9eB
+
+https://pastebin.com/hUszvNka
+
+https://pastebin.com/aAYkuDC4
+

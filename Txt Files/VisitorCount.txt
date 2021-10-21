@@ -1,0 +1,39 @@
+import React, { Component } from 'react';
+
+class VisitorCount extends Component {
+    constructor(props) {
+        super(props);
+        this.state = ({
+            noOfUsers:0
+        })
+        console.log("Before: "+this.state.noOfUsers)
+    }
+    addCount(){
+        this.setState(
+            {
+              noOfUsers:this.state.noOfUsers+1
+            },()=>{console.log("sync clicking: "+this.state.noOfUsers)}
+        )
+        console.log("After: "+this.state.noOfUsers)
+    }
+
+    incrementThreeTimes()
+    {
+        this.addCount()
+        this.addCount()
+        this.addCount()
+    }
+    
+    render() {
+        return (
+            <div>
+                <h1>
+                Number Of Visitor:{this.state.noOfUsers}<br/>
+                <button onClick={() => this.incrementThreeTimes()}>Go</button>
+                </h1>
+            </div>
+        );
+    }
+}
+
+export default VisitorCount

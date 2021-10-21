@@ -1,0 +1,197 @@
+Selenium
+--------
+  1.Open source
+  2.Automating web application(interaction between windows and web applications)
+  3.Retesting--Build 1 --debuged--again test in Build 2
+
+Function Testing-checking the functionalities according to requirements 
+Regresion testing-
+------------------
+side effects of retesting(to check the changes in other modules)
+
+Test Suite:collection of test script
+Test script-collection of java files of manual testing
+
+www.seleniumhq.org//selenium.dev
+
+Selenium Components/Flavors
+----------------------------
+1.Selenium IDE(Drawback-
+*automating only using mozilla only)
+*Changing or modifications in any condition(for or if)
+
+2.Selenium RC- 2 tier Architecture(Server and Client)-Takes more time to execute
+3.Selenium WebDriver-Directly run on the client machine(drawback-run sequentially)
+4.Selenium Grid(running test cases serially and parallely)
+5.Appium(mobile application testing)
+6.Winium-windows based applications
+
+Cross browser Testing tool
+Works with Java,C#,PHP,Javascript,Python,Blue Scripts...
+
+Core Java
+----------
+1.class and obj
+2.Builtin class where we can store multipledatatype elements in an array-Obj class
+3.how to interchange ref of an obj
+4.userdefined functions
+5.static
+6.constructor
+7.Inheritance
+8.Interface
+9.Exception handling
+10.Collection APIs-Arraylist/List,Hashset/Set,Hashtable
+11.Properties File
+12.Work with Excel
+13.String methods
+
+JUnit or TestNG(Test Next Generation)
+--------------------------------------
+1.Annotations 
+@Test
+@BeforeMethod
+@AfterMethod
+@BeforeClass
+@AfterClass
+
+While creating java test classes,the name should be prefix or suffix with test
+
+Order
+ASCII Ascending
+Prioity
+
+Comparing-Assertion
+----------------------
+If only one test wants to be checked go for hard assert
+........................................................
+1.HardAssert-->if we surround with try,,catch block--
+it is taken as dummy and the test case pass in every time
+2.SoftAssert-->If one test case fail, it will go for next test
+
+In Eclipse,,hot key for collecting return datatype --> ctrl+1+Enter
+
+Working with Excel:
+---------------------
+1.Add jar files
+2.Add xlsx file in the project
+3.Using ShineXlsReader, we can read files from Excel
+
+getRowCount
+getColumnCount
+getCellData
+setCellData
+addSheet
+addColumn
+
+Here,Relative path is important..so that during sharing,
+we no need to change the path
+
+TestSuite
+----------
+src-TestNG-convert to TestNG-refresh->test-output(will create)
+Copy the index.html path and open in web browser and send it as defect sheet
+
+ctrl+Shift+O--->hot keys for importing all the packages
+
+Day 2:
+======
+8 Locators to locate an element in the web page:
+------------------------------------------------
+1.Id(priority-1)
+2.Css(3)
+3.xpath-address of an object in the web page(4)
+4.Name(priority-2)
+5.className
+6.tagname
+7.linktext
+8.partiallinktext
+
+2 types of xpath
+-------------------
+1.Relative xpath-always start with //
+Eg://*[@id="loginBox"]
+2.Absolute xpath-always start with /html
+Eg:/html/body/table/tbody/tr/td
+
+Chropath--->addon to find relative and absolute xpath
+
+2 types of SeleniumWaitStatements
+------------------------------------
+1.Implicit wait--GlobalTime(Max time + 1 or 2 sec)
+2.Explicit wait
+ Ctrl+F-->to check number of frames
+
+Working with select object
+------------------------------
+1.currentlocation.sendKeys("Chennai");``````````````But it will work on 80% of the time
+
+Create an instance Select
+s.selectByIndex();
+s.selectByValue();
+s.selectByVisibleText();
+
+Working with tabs
+-------------------
+driver.getWindowHandles();
+Using iterator,retrieve tab values
+driver.switchTo().window(t1)
+driver.close
+driver.switchTo().window(main)
+
+Taking ScreenShot
+--------------------
+Interface--->((TakesScreenShot)driver).getScreenShot
+
+driver.navigate().back();
+		//navigate forward
+		driver.navigate().forward();
+		//driver.navigate().refresh();
+		//driver.get(driver.getCurrentUrl());
+		//Without using refresh and without having keyboard action
+		//driver.manager().deleteAllCookies();
+
+		//driver.navigate().to("url");--->
+The difference between these two is(get) and (navigate().to("url")is
+    get is having the default time of 45 sec to load all the driver dependencies and all
+    whereas navigate won't have that time access
+
+For ToolTip
+----------------
+.getAttribute("alt");
+
+Working with Sikuli
+---------------------
+1.Import  all the jar files
+2.Take the img of what are the elements need to be performed
+Because Sikuli recognizes elements by images only..
+3.Create Pattern and Screen
+
+Working with alert:
+-------------------
+driver.switchTo().alert();
+alert.accept();
+alert.dismiss();
+
+Working with frames:
+------------------------
+driver.switchTo().frame("id_name");
+driver.switchTo().defaultContent();
+
+For drop-down button
+--------------------------
+s.selectByValue
+s.selectByIndex
+s.selectByVisibleText
+
+For WebTable
+--------------
+Retrieve using iterator or for loop
+
+Explicit wait:-->Conditional wait statements
+--------------
+1.Web Driver Wait
+2.Fluent wait
+
+
+
+

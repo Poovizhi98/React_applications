@@ -1,0 +1,61 @@
+import React, { Component } from 'react';
+import AddingComChild from './AddingComChild';
+
+class AddingCompany extends Component {
+    constructor(props) {
+        super(props);
+        this.state = ({
+            items: [],
+            cname: '',
+            caddress:''
+    })
+        this.handleSubmit=this.handleSubmit.bind(this)
+        this.onChange1=this.onChange1.bind(this)
+        this.onChange2=this.onChange2.bind(this)
+    }
+
+    onChange1(e) {
+        this.setState({cname: e.target.value});
+    }
+    onChange2(e) {
+        this.setState({caddress: e.target.value});
+    }
+    handleSubmit(e) 
+    {
+        e.preventDefault();
+        var nextItems = this.state.items.concat([this.state.cname])
+        .concat([this.state.caddress]); 
+        var nextText = '';
+        this.setState({items: nextItems, cname: nextText,caddress:nextText});
+    }
+    
+    render() {
+        return (
+            <div>
+             <h3>COMPANY</h3>
+            <form onSubmit={this.handleSubmit}>
+              Enter company name: <input onChange={this.onChange1} value={this.state.cname}/> 
+              Enter company address:<input onChange={this.onChange2}  value={this.state.caddress}/>
+                <button >Add</button><br/>
+                <AddingComChild items={this.state.items}></AddingComChild>
+            </form>    
+            </div>
+        );
+    }
+}
+
+export default AddingCompany;
+
+_______________________________________________________________________________________-
+import React, { Component } from 'react';
+
+class AddingComChild extends Component {
+    render() {
+        var createItem = function(itemText) {
+            return <li>{itemText}</li>;
+        };
+    return <ul>{this.props.items.map(createItem)}</ul>;
+    }
+}
+
+export default AddingComChild;

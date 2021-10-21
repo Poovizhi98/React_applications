@@ -1,0 +1,27 @@
+useState()--->this.setState()--->Updates local component state
+useEffect()--->componentDidMount()--->call function automatically
+useContext()--->react-redux--->access and update the global context state
+useReducer()--->react-redux--->update local component state and does not update state globally by itself
+
+useEffect(()=>{
+  ()=>{return value}
+}
+)
+
+useEffect(()=>
+{ 
+  ()=>{return value}
+},[])
+
+useEffect(()=>
+{
+  ()=>{return value}
+},[state.value]
+)
+
+Hooks code
+------------
+https://github.com/iqbal125/modern-react-app-sample
+Final hooks code
+------------------
+https://github.com/iqbal125/react-hooks

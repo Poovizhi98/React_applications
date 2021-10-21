@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>Movie player with poster</title>
+    </head>
+    <body>
+        <form>
+            <input type="button" value="play/pause" id="play/pause" onclick="playpause()"/>
+            <input class="class1" type="button" value="normal" id="normal" onclick="makenormal()"/>
+            <input type="button" value="big" id="big" onclick="makebig()"/>
+            <input type="button" value="small" id="small" onclick="makesmall()"/>
+            <video id="myVideo" width="420" controls>
+                <source src="comali.mkv" type="video/mkv">
+            </video>
+            
+        </form>
+        <script>
+             myvideos=document.getElementById("myVideo")
+            function playpause()
+            {
+                if(myvideos.paused)
+                {
+                    myvideos.play()
+                }
+                else
+                myvideos.pause()
+            }
+            function makebig()
+            {
+                myvideos.width=560;
+            }
+            function makesmall()
+            {
+                myvideos.width=320;
+            }
+            function makenormal()
+            {
+                myvideos.width=420;
+            }
+        </script>
+    </body>
+</html>
+
+
+4,8
+5,7
+3,3,3
+
+https://pastebin.com/rjudkHg2
+
+https://pastebin.com/4UrmyH2i
+
+https://pastebin.com/ZCWD7UnG
+
+https://pastebin.com/MpHSTdry
+
+https://codeshare.io/249jlK
+
+
+https://pastebin.com/acCWpB06

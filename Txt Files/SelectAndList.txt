@@ -1,0 +1,141 @@
+import React, { useState as useStateMock } from 'react';
+import { shallow, mount } from 'enzyme'
+import renderer from 'react-test-renderer'
+import { findByTestAttribute, checkProps } from '../../../Testing/index'
+import DtcSelectAndList from '../DtcSelectAndList'
+
+jest.mock('react', () => ({
+  ...jest.requireActual('react'),
+  useState: jest.fn(),
+}));
+
+const setUp = (props={}) => {
+    const component = shallow(<DtcSelectAndList {...props}/>)
+    return component
+}
+const mountsetUp = (props={}) => {
+    const component = mount(<DtcSelectAndList {...props}/>)
+    return component
+}
+
+describe('Select and List Component', () => {
+
+    describe('Check PropTypes',()=>{
+        
+        it('Should Not Throw a Warning',()=>{
+            const expectedProps = {
+              SelectAndListData : {
+                 "options":[
+                      { "label":"Person1","id":1,"collaborator":"Person1", "role":"developer","collaboratorId":1,"isPresenter":false,"sessionId": "00000000-0000-0000-0000-000000000000" },
+                  ]
+                },
+                selectedList : {
+                show: [],
+                checkboxvalue:"isPresenter",
+                checkboxname:"Presenter",
+                checkbox : true,
+                displaybox: ["collaborator","role"],
+                preloaded: 1
+            },
+            images :{
+                "delIcon":require("../../../DemoComponents/Select-And-List/Images/delIcon.png"),
+                "plusIcon":require("../../../DemoComponents/Select-And-List/Images/plusIcon.png")
+            }
+            }
+            const propsError=checkProps(DtcSelectAndList,expectedProps)
+            expect(propsError).toBeUndefined()
+        })
+    })
+
+
+    describe('Component Renders and checks for events and functions',()=>{
+        let wrapper
+        let mountWrapper
+        let snapshot
+        const setState = jest.fn();    
+
+    afterEach(() => {
+        jest.clearAllMocks();
+      });
+
+
+        beforeEach(() => {
+            useStateMock.mockImplementation((init) => [init, setState]);
+            const props = {
+                SelectAndListData : {
+                   "options":[
+                        { "label":"Person1","id":1,"collaborator":"Person1", "role":"developer","collaboratorId":1,"isPresenter":false,"sessionId": "00000000-0000-0000-0000-000000000000" },
+                    ]
+                  },
+              selectedList : {
+                  show: ["id","collaborator","role","collaboratorId","isPresenter","sessionId"],
+                  checkboxvalue:"isPresenter",
+                  checkboxname:"Presenter",
+                  checkbox : true,
+                  displaybox: ["collaborator","role"],
+                  preloaded: 1
+              },
+              images :{
+                  "delIcon":require("../../../DemoComponents/Select-And-List/Images/delIcon.png")
+              }
+              }
+            wrapper = setUp(props)
+            mountWrapper = mountsetUp(props)
+            snapshot = renderer.create(<DtcSelectAndList {...props} />);
+        })
+        it('Should render without errors', () => {
+            const component = findByTestAttribute(wrapper, 'table-container')
+            expect(component.length).toBe(1)
+        })
+
+        it('Should render Selected-List', () => {
+            const component = findByTestAttribute(wrapper, 'selected-container')
+            expect(component.length).toBe(1)
+        })
+        it('Should render Select button', () => {
+            const component = findByTestAttribute(wrapper, 'select-button')
+            expect(component.length).toBe(1)
+        })
+        it('Should render Add button', () => {
+            const component = findByTestAttribute(wrapper, 'add-button')
+            expect(component.length).toBe(1)
+        })
+        test('snapshot renders', () => {
+            let tree = snapshot.toJSON();
+            expect(tree).toMatchSnapshot();
+          })
+        it('should render React-Select library',()=>{
+            expect(mountWrapper.find('Select').length).toEqual(1)
+        })
+        it('should handle click correctly', () => {
+            const logSpy = jest.spyOn(console, 'log');
+            const button = wrapper.find('img').first();
+            button.simulate('click');
+            expect(logSpy).toBeCalledWith('Hello world');
+          })
+        // it('should add items properly on click of delete button',()=>{
+        //     const items = wrapper.find('label')
+        //     expect(items.length).toBe(1) 
+        //     const button = wrapper.find('img').last()
+        //     button.simulate('click'); 
+        //     expect(items.length).toBe(0)       
+        // })
+
+        it("checking the state changes",()=>{
+             wrapper.find('img').first().props().onClick()
+             expect(setState).toHaveBeenCalledTimes(1);           
+        })
+        
+    
+
+        // it('Should emit callback on click events', ()=>{
+        //     const addButton = wrapper.find("img").first()
+        //     addButton.simulate("click",mockFunction)
+        //     const callback = mockFunction.mock.calls.length
+            // expect(callback).toBe(1)
+        //     expect(callback).toBeCalled()
+        // })
+
+    })
+
+})

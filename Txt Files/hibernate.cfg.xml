@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+		<property name="hibernate.current_session_context_class">thread</property>
+		<property name="hibernate.ogm.datastore.provider">mongodb</property>
+<!-- 		<property name="hibernate.ogm.datastore.grid_dialect">org.hibernate.ogm.dialect.mongodb.MongoDBDialect</property>
+ -->		<property name="hibernate.ogm.datastore.database">hibernateDB</property>
+<!-- 			<property name="hibernate.ogm.datastore.create_database">true</property>
+ -->		<property name="hibernate.ogm.datastore.host">127.0.0.1</property>
+		<property name="hibernate.ogm.datastore.port">27017</property>
+		<mapping resource="employee.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>
+
+<!-- <?xml version='1.0' encoding='utf-8'?> <!DOCTYPE hibernate-configuration 
+	PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd"> 
+	<hibernate-configuration> <session-factory> <property name="connection.driver_class">com.mysql.jdbc.Driver</property> 
+	<property name="connection.url">jdbc:mysql://localhost:3306/day2</property> 
+	<property name="connection.username">root</property> <property name="connection.password">root</property> 
+	<property name="dialect">org.hibernate.dialect.MySQLDialect</property> <property 
+	name="show_sql">false</property> <property name="hibernate.hbm2ddl.auto">create</property> 
+	Mapping files <mapping resource="employee.hbm.xml"/> </session-factory> </hibernate-configuration> -->

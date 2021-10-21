@@ -1,0 +1,67 @@
+Sass
+=======
+1.variables
+--------------
+$primary-color:grey;
+body{
+background:$primary-color
+}
+2.map-get
+------------
+$font-weights:(
+"regular":400,
+"medium":500,
+"bold":700
+);
+p{
+font-weight:map-get($font-weight,bold)
+}
+3.Nesting
+---------
+.main{
+  margin:0 auto;
+  .main-paragraph{
+   font-weight:
+   }
+}
+.main{
+  margin:0 auto;
+&-paragraph{
+  font-weight;
+}
+}---->.main-paragraph{}
+SO WHEN YOU ARE NESTING AND USING &, WRITE #{&}--->meant for before 
+4.@import
+-------------
+We can be able to include other scss files through @import 'pathdir'(./a)
+5.@functions
+-----------
+@functions weight($weight-name){
+  @return map-get($font-weights,$weight-name);
+}
+6.@mixins
+------------
+@mixin flexCenter($direction){
+----------------------------------
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:$direction;
+}
+while using---->@include flexCenter(row)
+FUNCTION IS FOR RETURNING SOME VALUES
+MIXINS IS ONLY FOR STYLING
+@mixin changeTheme($light-theme:true){
+------------------------------------------
+if $light-theme{
+background:lighten($primary-color,100%)
+}
+}
+@mixin mobile{
+@media(max-width:800px){
+@content;
+}
+}
+7.@extend
+-----------
+@extend .main_para2;

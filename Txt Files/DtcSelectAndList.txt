@@ -1,0 +1,149 @@
+import React, { useState as useStateMock } from 'react';
+import { shallow } from 'enzyme'
+import renderer from 'react-test-renderer'
+import { findByTestAttribute, checkProps } from '../../../Testing/index'
+import DtcSelectAndList from '../DtcSelectAndList'
+
+jest.mock('react', () => ({
+  ...jest.requireActual('react'),
+  useState: jest.fn(),
+}))
+
+describe('Select and List Component', () => {
+
+    describe('Check PropTypes',()=>{
+        
+        it('Should Not Throw a Warning',()=>{
+            const expectedProps = {
+              SelectAndListData : {
+                 "options":[
+                      { "label":"Person1","id":1,"collaborator":"Person1", "role":"developer","collaboratorId":1,"isPresenter":false,"sessionId": "00000000-0000-0000-0000-000000000000" },
+                  ]
+                },
+                selectedList : {
+                show: [],
+                checkboxvalue:"isPresenter",
+                checkboxname:"Presenter",
+                checkbox : true,
+                displaybox: ["collaborator","role"],
+                preloaded: 1
+            },
+            images :{
+                "delIcon":require("../../../DemoComponents/Select-And-List/Images/delIcon.png"),
+                "plusIcon":require("../../../DemoComponents/Select-And-List/Images/plusIcon.png")
+            }
+            }
+            const propsError=checkProps(DtcSelectAndList,expectedProps)
+            expect(propsError).toBeUndefined()
+        })
+    })
+
+
+    describe('Component Renders and checks for events and functions',()=>{
+        let wrapper
+        let snapshot
+        const setState = jest.fn(); 
+
+    afterEach(() => {
+        jest.clearAllMocks();
+      });
+
+
+        beforeEach(() => {
+            useStateMock.mockImplementation((init) => [init, setState]);
+            const SelectAndListData = {
+                   "options":[
+                        { "label":"Person1","id":1,"collaborator":"Person1", "role":"developer","collaboratorId":1,"isPresenter":false,"sessionId": "00000000-0000-0000-0000-000000000000" }
+                    ]
+                  }
+            const selectedList = {
+                  show: ["id","collaborator","role","collaboratorId","isPresenter","sessionId"],
+                  checkboxvalue:"isPresenter",
+                  checkboxname:"Presenter",
+                  checkbox : true,
+                  displaybox: ["collaborator","role"],
+                  preloaded: 1
+              }
+            const images = {
+                  "delIcon":require("../../../DemoComponents/Select-And-List/Images/delIcon.png")
+              }
+              
+            wrapper = shallow(<DtcSelectAndList SelectAndListData={SelectAndListData} selectedList={selectedList} images={images}/>)
+            snapshot = renderer.create(<DtcSelectAndList SelectAndListData={SelectAndListData} selectedList={selectedList} images={images}/>);
+        })
+        it('Should render without errors', () => {
+            const component = findByTestAttribute(wrapper, 'table-container')
+            expect(component.length).toBe(1)
+        })
+
+        it('Should render Selected-List', () => {
+            const component = findByTestAttribute(wrapper, 'selected-container')
+            expect(component.length).toBe(1)
+        })
+        it('Should render Select button', () => {
+            const component = findByTestAttribute(wrapper, 'select-button')
+            expect(component.length).toBe(1)
+        })
+        it('Should render Add button', () => {
+            const component = findByTestAttribute(wrapper, 'add-button')
+            expect(component.length).toBe(1)
+        })
+        test('snapshot renders', () => {
+            let tree = snapshot.toJSON();
+            expect(tree).toMatchSnapshot();
+          })
+        it('should render React-Select library',()=>{
+            const component = findByTestAttribute(wrapper, 'select-button')
+            expect(component.length).toEqual(1)
+        })
+
+        it("checking the state changes on click of add button",()=>{
+             wrapper.find('img').first().props().onClick()
+             expect(setState).toHaveBeenCalledTimes(1);  
+        })
+
+        it("checks for delete button", ()=>{
+            //  const component = findByTestAttribute(wrapper, 'client-name')
+            //  expect(component.first().text()).toBe('Person1')
+             const button = wrapper.find('img').last()
+             button.simulate('click')
+             expect(setState).toHaveBeenLastCalledWith(
+                  [
+                    {
+                     "collaborator": "Person1",
+                     "collaboratorId": 1,
+                     "id": 1,
+                     "isPresenter": false,
+                     "label": "Person1",
+                     "role": "developer",
+                     "sessionId": "00000000-0000-0000-0000-000000000000",
+                   },
+                 ],
+    );
+        })
+
+        it("checking onChange for Checkbox",()=>{
+            const event = {
+                target: { checked: true }
+              };
+            const component = findByTestAttribute(wrapper, 'check_box')
+            expect(component.props().checked).toBeUndefined()
+            component.simulate('change', event)
+            expect(setState).toHaveBeenCalledWith(true) 
+        })
+        
+        it("checking onChange for select box",()=>{
+             const event = {
+                "options" : { "label":"Person1","id":1,"collaborator":"Person1", "role":"developer","collaboratorId":1,"isPresenter":false,"sessionId": "00000000-0000-0000-0000-000000000000" }
+              };
+            const component = findByTestAttribute(wrapper, 'select-button')
+            expect(component.props().value).toBe(null)
+             component.simulate('change', event)
+             expect(setState).toHaveBeenCalledWith({
+                "options" : { "label":"Person1","id":1,"collaborator":"Person1", "role":"developer","collaboratorId":1,"isPresenter":false,"sessionId": "00000000-0000-0000-0000-000000000000" }
+              }) 
+        })
+
+    })
+
+})

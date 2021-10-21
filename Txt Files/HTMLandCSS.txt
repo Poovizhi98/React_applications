@@ -1,0 +1,398 @@
+Css Box model
+----------------
+1.margin
+2.border
+3.padding
+4.font-size
+5.font
+Tooltip---->gives extra information when the cursor is hover over
+-----------
+
+Html
+------
+1.tags
+2.attributes
+HTML Comments
+--------------
+<!--  -->
+
+Tags ex:
+--------
+<h> <br>
+<p> <hr>
+<img> <a>
+<big> <small> 
+
+Attributes ex:
+----------------
+src=  href= width= height=
+
+alt= (alternative when img is not displayed)
+style= lang= (The language of the document can be declared)
+title= disabled= (specifies the input element to be disabled)
+
+Headings in html
+-----------------
+<h1 style="font-size:50px">Heading 1</h1>
+
+Meta tag
+---------
+provides the information about the tag
+always used with values/name pairs
+We can use viewport here
+machine parseable
+* what the topic is
+* Each keyword actually reflects the content of your pages
+* useful during the search
+* meta tag is having many attributes
+Eg:
+----
+name=  content= value= description= keywords= author= date= rights= 
+http-equi="refresh" content="30"
+
+Link tag
+----------
+<link> tag to link between external style sheets with html document
+Attributes in link tag
+------------------------
+<link rel="icon" href="xxx.gif" type="image/gif" sizes="16*16"> 
+
+css styles in html(<tagname style="property:value;")
+--------------------
+font font-size  font-family text-align color background-color
+
+Html tags
+--------------
+<b><i><sub><sup><strong><small><big><em>(Like italic)<mark><del><ins>(underlined)
+<q><blockquote cite="">(taking from another website)[Browsers usually indent]
+<abbr title="World Health Organization">WHO</abbr>(for abbreviation)
+<address> defines contact information of the author of the document(displayed in italic and each line should have break)
+<cite>(defines the title of the work)[in italic]
+<bdo>(bidirectional over-ride)[writes from right to left]
+<p style="border:2px solid Tomato></p>
+
+Link tags
+----------
+<a href=" " target=" "> </a>
+<a href=" " style="text-decoration:none"></a>(To remove underline from the link)
+Styles
+--------
+a:link{
+color:  ,background-color:transparent,text-decoration:none
+}
+visited,hover,active
+css display:inline display:block display:inline-block
+
+Link bookmarks
+---------------
+<h2 id="C4">Chapter 4</h2>
+<a href="#C4">Jump to chapter 4</a>
+
+For different page
+--------------------
+<a href="html_demo.html#C4>
+
+Images
+---------
+<img src=" .jpg" alt=" " usemap="#nameofthemap">
+<map name="nameofthemap">
+<area shape="rect coords=",,," alt="" href=""></map>
+Background-image
+------------------
+<div style="background-image:url('a.jpg')"></div>
+background-image:url('a.jpg');background-repeat:no-repeat;
+background-size:cover(cover the entire element)
+To make sure that the background-size will cover,,
+make background-attachement:fixed)
+
+<picture>Element
+-------------------
+<picture>
+<source media="(min-width:400px)" srcset="img1.jpg">
+<source media="(min-width:600px)" srcset="img2.jpg">
+<img src="img3.jpg">
+</picture>
+
+Tables
+-----------
+<table><th><tr><td>
+table,th,td{
+border:1px solid black;border-collapse:collapse}
+th,td{padding:5px}
+<caption>Monthly Savings</caption>
+table#t01 tr:nth-child(even)
+
+Lists-Disc
+-----------
+<ul style="list-style-type:disc"></ul>
+<ol type="i"></ol>
+<ol start="50"></ol>
+DEscription Lists
+--------------------
+<dl><dt><dd></dd></dt></dl>
+css property:
+----------------
+overflow:hidden/visible/auto
+
+<iframe></iframe>
+--------------------
+document within the document
+<iframe src="xxx" ></iframe>
+
+Responsive
+-------------
+Picture
+---------
+<picture>
+  <source srcset=" " media="(max-width:600px)">
+Text responsive
+----------------
+<p style="font-size:10vw"></p>
+@media query
+---------------
+@media screen and (max-width:800px){
+#id{
+width:100%}}
+
+Computer codes--><code><kbd><var>
+---------------
+Entities
+---------
+&lt  &gt &amp &copy 
+&nbsp
+
+HTML Forms
+===========
+<form action="a.py" method="post"></form>
+<fieldset><legend></legend></fieldset>(group into related datas)
+<figure><figcaption>
+Form elements
+-----------------
+<select name="cars" size="3" multiple><option value="volvo" selected>Volvo</option></select>
+<textarea name="language" rows="10" cols="30"></textarea>
+<input list="browsers">
+<datalist id="browsers">
+  <option value=" ">
+</datalist>
+</input>
+Input Attributes
+-----------------
+readonly,disabled,autocomplete,autofocus,formaction
+formtarget-(submit into new page),pattern="[a-zA-Z]{3}"
+
+HTML 5
+========
+<!DOCTYPE html>
+<meta charset="UTF-8">
+HTML5 Elements
+----------------
+<header><footer><section><aside><nav><article>
+<section><article></article><article></article></section>
+
+HTML Graphics
+---------------
+<canvas>(only a container to draw graphics)
+(use javascript to draw whatever you want)
+<svg>(Scalable Vector Graphics)
+SVG stroke--->color of a line,text or outline of an element
+
+HTML Media
+------------
+<video controls>(controls the play,pause)
+autoplay
+<video id="" width=">
+  <source src=".mp4" type="video/mp4">
+<audio>
+HTML PLuggins
+-----------------
+<object width=" " height=" " data="a.html"> <embed width= heigth= src="">
+
+HTML Drag/Drop
+----------------
+function drag(ev){
+  ev.dataTransfer.setData("text",ev.target.id)}
+function drop(ev){
+  var data=ev.dataTransfer.getData("text")
+  ev.target.appendChild(document.getElementById(data))}
+
+HTML Web Storage
+-----------------
+if(typeof(Storage)!=="undefined"){
+
+}else{
+}
+LOcal Storage-->Stores data with no expiration date 
+Session Storage-->stores data for that particular session(If tab closed,then data will be lost)
+//Storing
+localStorage.setItem("a","asdgfg")
+localStorage.getItem("a")
+localStorage.removeItem("a")
+localStorage.clickcount=Number(localStorage.clickcount)+1
+
+CSS-->Cascade Style Sheets
+============================
+CSS syntax
+-----------
+selector description
+h1      {color:blue}
+Comments
+-----------
+/*   */
+External css--><link rel="stylesheet" type="text/css" href="mystyles.css">
+Internal css--><style>body{----}</style>
+Inline css--><body style="color:red">
+---------------
+Colors
+--------
+rgb,hex,hsl(0,100%,50%),rgba(255,99,71,0)-->0 means fully transparent
+Background
+------------
+color,image,repeat,attachment-fixed/scroll,position-right top
+Borders
+---------
+border-style:dotted,dashed,solid,double,groove,ridge,inset,outset,none
+border-width:  border-top-style:  border-right-style:  border-bottom-style
+border-color:  border-radius:
+Margins
+---------
+margin-top: shorthand-property:-->margin:25px 50px 75px
+margin:auto(horizontally center the elements within its container)
+margin-inherit:(inherits the margin from the parent element)
+Padding
+---------
+padding-top
+div{
+   width:300px;
+   padding:25px;
+   }
+now the div width should be:300px+(left padding 25px and right padding 25px)
+div{
+   width:300px;
+   padding:25px;
+   box-sizing:border-box;
+   }
+Height/Width
+--------------
+It has the following attributes
+auto,length,initial(height/width to default value),inherit
+maxheight
+Outline
+---------
+outline-style,outline-color,outline-width,outline-offset,outline
+outline-style:dotted,solid,dashed,double,groove,ridged,inset,outset,none
+outline-color:invert(the outline is visible regardless of the bg color)
+outline-width:thin,thick,medium,specify size
+outline-offset:space between outline and border
+Text
+-------
+color,text-align:justify(stretches the line so that all lines have equal width,left and right margins)
+text-decoration:overline,line-through,none,underlined
+text-transform:lowercase,uppercase,capitalize
+text-indent:50px(intend 1st line)
+letter-spacing:3px,-3px;
+line-height:1.3;(space between two lines)
+direction:rtl(<bdo>)
+word-spacing:5px
+text-shadow:3px 2px red;(horizontal shadow,vertical shadow,color)
+Fonts
+-------
+font-family:"Times New Roman",Times,serif(Serif,Sans-serif,monospace)
+font-style:normal,italic,oblique(it is less suported)
+font-size: 20px;2em(1 em=16px),%
+body{ font-size:100%; }h1{font-size:2.5em;}(using % and em Shows same text size in all browsers and allows to zoom or resize the text)
+font-weight:normal,lighter,bold,900;
+REsponsive text-->font-size:5vw(unit vw)use meta tag also
+----------------
+font-variant:normal,small-caps(lowercase into upper but original is big)
+Icons
+-------
+1.fontawesome.com(get sign in and add icons)
+2.<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.
+css"><i class="glyphicon glyphicon-cloud"></i>
+3.Google Icons:----><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<i class="material-icons">cloud</i>
+Links
+-------
+a:link,a:visited,a:hover,a:active
+Order;--------->a:hover MUST come after a:link and a:visited
+a:active MUST come after a:hover(link,visited,hover,active)
+text-decoration,background-color
+Lists
+--------
+list-style-type:circle,square,upper-roman,lower-alpha;
+list-style-image:url('a.gif');
+list-style-position:outside,inside;
+list-style-type:none(to remove markers..also make padding and margin 0)
+Table
+--------
+<div overflow-x:auto>
+  <table></table></div>
+#tablename{font-family,border-collapse,width}
+#tablename td,#tablename th{border,padding}
+#tablename tr:nth-child(even){background-color: }
+#tablename tr:hover{bgcolor: }
+#tablename th{padding-top,padding-bottom,textalign,bgcolor,color}
+Display
+---------
+display:block,inline,default,none(like delete)visiblity:hidden(just hide)
+width and max-width(for smaller devices also)
+-----------------------
+div1{ width:500px; margin: auto; }//It will not work below 500px..So,use,
+div2{ max-width:500px; margin: auto; }
+Position:
+-----------
+position:static,fixed,relative(relativeto),absolute,left,right,z-index=-1
+Overflow:
+-----------
+overflow:hidden,visible,scroll,auto(overflow-x,overflow-y)
+Float:
+---------
+float:left,right,none,inherit
+clear:left,right,none,inherit
+Clearfix hack---->1.overflow:auto;
+2).clearfix::after{ content:"";clear:both;display:table;}
+For equal boxes,-->give width:33.333%,float:left,box-sizing:border-box
+For equal height boxes,-->give height:300px;(But this is not flexible)
+display:flex;flex-wrap:nowrap;line-height,width
+Align(to make center)
+-----------------------
+1.margin-left: auto;margin-right:auto;
+2.using position:absolute and right,left(like that)
+3.using position:absolute and transform:translate(-50%,-50%)
+Combinators
+---------------
+descendant selectors--->within all elements div p{}
+child selectors--->within but only immediate child not grandchild div>p{}
+adjacent sibling--->adjacent sibling of a specified element div+p{}
+general sibling--->all elements adjacent of specified element div~p{}
+Pseudo-class
+---------------
+a:hover,a.classname:hover,div:hover,div:hover p,p:first-child,p i:first-child(matching the first <i> element in <p>elements),p:first-child i(matching all <i>elements in all first-child p elements)
+Pseudo-Elements
+------------------
+p::first-line{},p.intro::first-letter{},h1::before{content:url("a.gif"},h1::after{},::selection{}
+Opacity(transparency)
+------------------------
+img{opacity:0.5}img:hover{opacity:1.0}
+Use opacity with rgba so that letters will be visible and not bg
+Navigation Bar
+-----------------
+Vertical--->display:block,list-style-type:none
+Horizontal--->1.display:inline2.display:block,float:left,overflow:hidden
+To make responsive nav,use @media screen and (max-width:600px)
+Dropdowns
+------------
+.dropdown{position:relative,display:inline-block}
+.dropdown-content{display:none,position:absolute,box-shadow,}
+.dropdown:hover .dropdown-content{display:block;}
+Gallery
+-----------
+div.gallery{float:left;width:180px} 
+div.gallery img{width:100%;height:auto;}
+we can create responsive gallery using @media queries
+Image sprites
+-----------------
+Give left:0,63,129px width:46,43,43px background:url('a.gif') 0 0;
+to hover----> set background as 0 -45px,-47 -45px,-91 -45px;
+Attr Selectors,Forms,counters,Website Layouts,Units,Specificity
+------------------------------------------------------------------

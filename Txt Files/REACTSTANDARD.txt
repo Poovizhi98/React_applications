@@ -1,0 +1,11 @@
+FOR PORTFOLIO
+
+Api fetch different place
+Home in sprate folder and name it as index.js
+Import should be proper
+1.React dependencies
+2.Redux
+3.Local imports
+4.Then css imports
+env file
+Instead of passing whole employee data only get one emplyee data by passing empId

@@ -1,0 +1,11 @@
+1.Reusable of html codes
+2.Deals everything with component
+3.no ned to create full html code for one full page
+4.Using jsx syntax
+Functional Component
+-----------------------
+Using props,we can have code-reusability of html divs(same codes)
+1)function functionName(props){
+return()}
+2)const functionName=(props)=>{
+return()}

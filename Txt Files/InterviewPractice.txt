@@ -1,0 +1,17 @@
+Hands-on knowledge of HTML5, CSS3, JavaScript
+
+•   Hands-on experience working with Object Oriented JavaScript (OOJS), JavaScript - and practical uses in building complex interactive experiences, primarily with ECMAScript 2015+. You should be up-to-date with new specifications (different stages), and also, using transpilers like Babel to use features from all stages
+
+•   Good understanding of creational and structural design patterns in JavaScript
+
+•   Experience working with Single Page Applications (SPA) with universal rendering capabilities.
+
+•   Good understanding of React.js, its core principles - lifecycle methods, virtual DOM etc. and at least 6 – 12 months hands-on experience with the same
+
+•   Understanding of one-way data flow and the Flux architecture.
+
+•   Understanding of stateful (container) vs stateless (presentational) components and how to break down the application page into components
+
+•   Core understanding of how React’s state management works out of the box.
+
+•   Understanding of different CSS architectures that go hand-in-hand with React.js application development. Pros and cons of component-level CSS vs global and where to apply each

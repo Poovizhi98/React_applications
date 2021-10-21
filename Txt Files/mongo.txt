@@ -1,0 +1,5 @@
+mongodb+srv://root:root@cluster0-lgxjm.mongodb.net/test?retryWrites=true&w=majority
+
+mongodb+srv://root:root@cluster0-lgxjm.mongodb.net/test?retryWrites=true&w=majority
+
+mongodb://tufail:ahmed123@ds339348.mlab.com:39348/todoappdxc

@@ -1,0 +1,72 @@
+import React, { Component } from 'react';
+import CommentEx1 from './CommentEx1';
+
+class CommentEx extends Component {
+    constructor(props) {
+        super(props);
+        this.state={value: '',msg:'',
+        validUser:false,textOfButton:'AddComment', 
+        items: [], text: ''}
+        this.handleChange=this.handleChange.bind(this)
+        this.takeInputData=this.takeInputData.bind(this)
+        this.toggleButton=this.toggleButton.bind(this)
+    }
+    handleChange(ourData)
+    {
+        this.setState({value:ourData.target.value})
+    }
+    takeInputData(ourData)
+    {
+        ourData.preventDefault();
+        var nextItems = this.state.items.concat([this.state.msg]);
+        this.setState({
+            items: nextItems,  msg:"Comment is: "+this.state.value})
+           
+    }
+    toggleButton(){
+        if(this.state.validUser==true)
+        {
+            var nextText=''
+            this.setState({
+            value :nextText,
+            textOfButton:'AddComment'
+            })
+        }
+        else{
+            this.setState({
+            textOfButton:'Edit' })
+            }
+    }
+    render() {
+        return (
+            <div>
+            <form onSubmit={this.takeInputData}>
+            <h3>Comment Section</h3><br/>
+           <label>Your Comment:<br/>
+           <input type="text" value={this.state.value} onChange={this.handleChange}/>
+           </label><br/>
+           <button onClick={this.toggleButton}>{ this.state.textOfButton }</button><br/>
+           <CommentEx1 items={this.state.items}></CommentEx1>
+           {this.state.msg}
+           </form>
+           </div>
+        );
+        
+    }
+}
+
+export default CommentEx;
+------------------------------------------------------------------------------------------
+
+import React, { Component } from 'react';
+
+class CommentEx1 extends Component {
+    render() {
+        var createItem = function(itemText) {
+            return <div>{itemText}</div>;
+        };
+    return <ul>{this.props.items.map(createItem)}</ul>;
+    }
+}
+
+export default CommentEx1;

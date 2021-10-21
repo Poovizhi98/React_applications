@@ -1,0 +1,117 @@
+import React from "react";
+import TextField from "material-ui/TextField";
+import RaisedButton from "material-ui/RaisedButton";
+import DropDownMenu from "material-ui/DropDownMenu";
+import MenuItem from "material-ui/MenuItem";
+import {RepMappingList} from './repdata';
+
+
+const styles = {
+  customWidth: {
+    width: 300
+  },
+};
+
+const names = []
+RepMappingList.map((a,i)=>(
+  names.push(<MenuItem key={i} value={i} primaryText={a.representativeName} /> ) 
+))
+
+export default class Form extends React.Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+                  value1: 0,
+                  value2:0,
+                  pincodes:[] }
+}
+
+  handleChangeNames = (event, index, value) =>{ 
+    RepMappingList.map((a,i)=>{
+       if (i===index){
+         this.setState({pincodes:[...a.pincode]})
+       } 
+       this.setState({value1:value});       
+    })
+  } 
+
+  handleChangePincodes =(event,index,value)=>{
+    console.log(value)
+    this.setState({value2:value})
+  }
+  
+  state = {
+    representativeName: "",
+    headQuaters: "",
+    regionName: "",
+    pincode: ""
+  };
+
+  change = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+      this.props.onSubmit(this.state);
+      // clear form
+      this.setState({
+        representativeName: "",
+        headQuaters: "",
+        regionName: "",
+        pincode: "",
+      });
+    
+  };
+ 
+  render() {
+    return (
+      <form>
+        <pre></pre>
+        <DropDownMenu
+             value={this.state.value1} 
+             onChange={this.handleChangeNames}
+             autoWidth={false}
+             style={styles.customWidth} 
+           >    
+         {names}  
+         </DropDownMenu>
+        
+        <br />
+        <TextField
+          name="headQuaters"
+          hintText="HQ"
+          floatingLabelText="HQ"
+          value={this.state.headQuaters}
+          onChange={e => this.change(e)}
+          floatingLabelFixed
+        />
+        <br />
+        <TextField
+          name="regionName"
+          hintText="regionname"
+          floatingLabelText="regionname"
+          value={this.state.regionName}
+          onChange={e => this.change(e)}
+          floatingLabelFixed
+        />
+        <br />
+        <DropDownMenu
+          value={this.state.value2}
+          onChange={this.handleChangePincodes}
+          style={styles.customWidth}
+          autoWidth={false}
+        >
+          {[...this.state.pincodes].map((pincode,i)=>(
+              <MenuItem key={i} value={i} primaryText={pincode}/>
+           ))}
+        </DropDownMenu>
+        <br />
+        <RaisedButton label="Submit" onClick={e => this.onSubmit(e)} primary />
+      </form>
+    );
+  }
+}

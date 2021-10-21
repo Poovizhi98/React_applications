@@ -1,0 +1,87 @@
+const redux=require('redux')
+
+//ReactDOM.render(<App />, document.getElementById('root'));
+
+const createStore=redux.createStore
+const combineReducers=redux.combineReducers
+const BUY_CAKE='BUY_CAKE';
+const BUY_ICECREAM='BUY_ICECREAM';
+function buyCake()
+{
+    return
+    {
+        type:BUY_CAKE
+    }
+}
+
+function buyIcecream()
+{
+    return
+    {
+        type:BUY_ICECREAM
+    }
+}
+
+const initialCake={
+    numberOfCakes:10
+}
+
+const initialIcecream={
+    numberOfIcecreams:20
+}
+
+const CakeReducer=(state=initialCake,action)=>
+{
+    switch(action.type)
+    {
+        case BUY_CAKE:
+            return {
+                ...state,
+                numberOfCakes:state.numberOfCakes-1
+            }
+        default: 
+            return state
+
+    }
+    
+}
+
+const IcecreamReducer=(state=initialIcecream,action)=>
+{
+    switch(action.type)
+    {
+        case BUY_ICECREAM:
+            return {
+                ...state,
+                numberOfIcecreams:state.numberOfIcecreams-1
+            }
+        default: 
+            return state
+
+    }
+    
+}
+
+const rootReducer=combineReducers({
+    cake:CakeReducer,
+    iceCream:IcecreamReducer
+})
+
+ const store=createStore(rootReducer)
+ console.log('Initial state is: '+store.getState())
+ const sub=store.subscribe(()=>console.log('Updated state is'+store.getState()))
+ store.dispatch(buyCake())
+ store.dispatch(buyIcecream())
+ sub()
+========================================================================
+MIDDLEWARE AND THUNK(FoR ASYNCHRONOUS ACTIONS)
+--------------------------------------------------
+import { applyMiddleware, createStore } from 'redux';
+import thunk from 'redux-thunk';
+
+import rootReducer from './rootReducer';
+import initialState from './initialState';
+
+const middlewares = [thunk];
+
+createStore(rootReducer, initialState, applyMiddleware(...middlewares));

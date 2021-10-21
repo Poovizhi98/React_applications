@@ -1,0 +1,8 @@
+git clone
+Do changes
+git checkout -b 'newbranch'
+git add .
+git coomit -m ''
+git push origin
+
+git pull
