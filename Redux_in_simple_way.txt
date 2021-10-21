@@ -1,0 +1,74 @@
+const store = createStore((state = initialEntries, action) => {
+    swtich(action.type) {
+	case 'ADD_ENTRY':
+	let newEntries = state.concat({
+	    id: 5,
+	    description: 'Hello from Redux'
+	)}
+	return newEntries;
+	break;
+	default: 
+	return state;
+})
+
+console.log('store: ', store.getState()) 
+store.dispatch({ type: 'ADD_ENTRY' });
+
+useSelector:  -> to get the state
+ const entries = useSelector((state) => state.entries);
+
+useDispatch:  -> to dispatch the action
+
+useReducer: 
+------------
+  const [state, dispatch] = useReducer(reducer, initialState, init)
+disptach({type: , val: })       // action's type and payload
+const reducer = (state, action) => {
+    
+}
+  state.value, 
+
+CONTEXT API
+-------------
+Create store folder -> auth-context.js
+const obj = React.createContext({})  -->  create context as an object
+<obj.Provider value={{}}></obj.Provider>        //   enclose Provider wherever the state needed
+<obj.Consumer>{(ctx)=>{}}</obj.Consumer>
+
+	OR
+const ctx = useContext(AuthContext);
+use ctx directly to get the values without Consumer
+
+Create custom ContextProvider in auth-context and manage all the states here
+and use useContext wherever u want that state
+Structure the app such that App.js should be presentational component.
+So, create new component and configure all the state changes there, in 
+index.js, call that component wrapping app.js. 
+
+LIMITATIONS:
+1. cannot use context for all the places. Use only props for creating UI
+2. Context cannot be used for high frequency changes.
+
+WHEN TO USE PROPS AND CONTEXT API:
+1. context won't make components reusable Eg: button Here, just use props as onClick={props.onClick}
+2. In some cases, it shld always do some particular function. At that time, use Context Eg: always logout in navigation link
+3. Context - passing props/state thru multiple components
+4. props - only to one level or immediate level
+
+
+D/b class and functional components:
+
+1. The key difference is syntax. 
+class - extends from React.component, js class, having render method, constructor, super(props), will be called before component unmounts. Therefore props and state will be undefined. using super(props) will inherit props value.
+Life cycle - componentDidMount - called once immediately after the first render - usefu during subscriptions
+componentWillUnmount - clearInterval - to unmount the subscriptions otherwise it will create memoryleak
+functional - js functions returning jsx
+useEffect - dependency array - componentDidMount, componentDidUpdate, componentWillUnmount - will be called during each and every render - it will handle update by default
+
+
+const hoc = (component, props) => {
+	const randomNum = Math.floor(Math.random() *10 );
+	return component({...props, randomNum})
+}
+
+
